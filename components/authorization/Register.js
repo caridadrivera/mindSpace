@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button, TextInput } from 'react-native';
-
-import { getAuth, createUserWithEmailAndPassword, connectAuthEmulator } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import  firebase from "@firebase/app-compat";
 
 export class Register extends Component {
      constructor(props){
@@ -16,19 +16,22 @@ export class Register extends Component {
      }//end of constructor
 
      onSignUp(){
-      const {name, email, password} = this.state;
+        const {name, email, password} = this.state;
+        const auth = getAuth();
 
-      const auth = getAuth();
-      connectAuthEmulator(auth);
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((response) =>{
-          console.log(response);
-        })
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((response) =>{
+            firebase.firestore().collection("users")
+              .doc(getAuth().currentUser.uid)
+              .set({name, 
+                email
+              })
 
-        .catch((error) => {
-         console.log(error.message)
-        })
-
+            console.log(response, 'user reg response');
+          })
+          .catch((error) => {
+          console.log(error.message)
+          })
      }//end of onSignUp
 
   render() {
