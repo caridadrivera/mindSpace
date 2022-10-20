@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import{View, Text} from "react-native";
-import { Form, FormItem} from 'react-native-form-component';
-
-import firebase from 'firebase/compat/app';
-import firestore from 'react-native-firebase/firestore';
+import { Form, FormItem} from 'react-native-form-component'
+import firestore from '@react-native-firebase/firestore'
 
 export class Add extends Component {
 
@@ -48,7 +45,11 @@ handleFormSubmission(){
     topic: this.state.topic,
   })
   .then(() => {
-    this.props.navigation.navigate("Profile", {topic: this.state.topic, message: this.state.message})
+    this.props.navigation
+    .navigate("Profile",                                                       
+      {topic: this.state.topic,
+       message: this.state.message
+      })
 
     console.log('Post added!');
   }, function errorFn(error){

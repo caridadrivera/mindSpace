@@ -5,6 +5,7 @@ import {Provider} from 'react-redux'
 import {legacy_createStore as createStore, applyMiddleware} from 'redux'
 import rootReducer from './redux/reducers'
 import thunk from 'redux-thunk'
+import { registerRootComponent } from 'expo';
 
 import firebase from 'firebase/compat/app';
 import {getFirestore,collection,getDocs} from 'firebase/firestore'
@@ -41,6 +42,8 @@ const navStack = createStackNavigator();
 const auth = getAuth(app);
 
 
+
+
 export class App extends Component {
    constructor(props){
      super(props);
@@ -48,6 +51,7 @@ export class App extends Component {
        loaded: false,
      }
    }
+
 
    componentDidMount(){
       onAuthStateChanged( auth, (user) => {
@@ -110,10 +114,8 @@ export class App extends Component {
     
   }
 }
-
 export default App
 
-
-
+registerRootComponent(App);
 
 
