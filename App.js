@@ -5,10 +5,8 @@ import {Provider} from 'react-redux'
 import {legacy_createStore as createStore, applyMiddleware} from 'redux'
 import rootReducer from './redux/reducers'
 import thunk from 'redux-thunk'
-import { registerRootComponent } from 'expo';
 
 import firebase from 'firebase/compat/app';
-import {getFirestore,collection,getDocs} from 'firebase/firestore'
 import AddScreen from './components/main/Add';
 import SaveScreen from './components/main/Save';
 
@@ -115,7 +113,5 @@ export class App extends Component {
   }
 }
 export default App
-
-registerRootComponent(App);
 
 

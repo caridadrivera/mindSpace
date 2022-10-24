@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Form, FormItem} from 'react-native-form-component'
-import firestore from '@react-native-firebase/firestore'
-
+import { doc, setDoc } from "firebase/firestore"; 
+//import firestore from '@react-native-firebase/firestore'
 export class Add extends Component {
 
 constructor(props){ 
@@ -35,9 +35,7 @@ handleMessageChange(value){
 
 handleFormSubmission(){
   //dopost request and await response. make async function 
-
-  firestore()
-  .collection('posts')
+  db.collection('posts')
   .add({
     comments: '',
     message: this.state.message,
